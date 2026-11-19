@@ -6,7 +6,7 @@ const nextButtons = document.querySelectorAll(".next-button");
 const yesButton = document.getElementById("yesButton");
 const noButton = document.getElementById("noButton");
 
-const WORKER_URL = "https://love-project-api.alireza10-sh.workers.dev/";
+const WORKER_URL = "https://midnight-note.alireza10-sh.workers.dev/";
 
 music.loop = true;
 music.preload = "auto";
