@@ -54,18 +54,33 @@ nextButtons.forEach((button) => {
 
 async function sendAnswer(answer) {
   changePage(answer === "yes" ? "pageEight" : "pageNine");
+
+  const answerText = answer === "yes" ? "بله ❤️" : "خیر";
+
+  const message =
+    answer === "yes"
+      ? "بله رو انتخاب کرد 💌 فک کنم باید شیرینی بدی ستونم."
+      : "فکر کنم باید دیگه کنار بیای با این واقعیت که نخواسته";
+
   try {
-    const response = await fetch(WORKER_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ answer, person: "saina" })
-    });
-    if (!response.ok) throw new Error(`Worker returned status ${response.status}`);
+    const response = await emailjs.send(
+      "service_3l97xye",
+      "template_21tb54q",
+      {
+        person: "ساینا",
+        answer: answerText,
+        message: message
+      },
+      {
+        publicKey: "f8XxwkpuseQ7qVLJ_"
+      }
+    );
+
+    console.log("Email sent successfully!", response.status);
   } catch (error) {
-    console.error(`Could not send ${answer.toUpperCase()} to Telegram:`, error);
+    console.error("Email sending failed:", error);
   }
 }
-
 yesButton.addEventListener("click", () => sendAnswer("yes"));
 noButton.addEventListener("click", () => sendAnswer("no"));
 
